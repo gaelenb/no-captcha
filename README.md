@@ -21,6 +21,19 @@ Add ServiceProvider to the providers array in `app/config/app.php`.
 Anhskohbo\NoCaptcha\NoCaptchaServiceProvider::class,
 ```
 
+#### Optional
+
+Publish provided callback file `callbacks.js` to `public/vendor/no-captcha/js`
+
+```
+php artisan vendor:publish --tag=captcha
+```
+
+Include this script on pages which use a captcha (it can be placed anywhere on the page):
+```
+{!! app('captcha')->renderCallbackFile() !!}
+```
+
 ### Configuration
 
 Add `NOCAPTCHA_SECRET` and `NOCAPTCHA_SITEKEY` in **.env** file (without brackets):
