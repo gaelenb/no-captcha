@@ -54,8 +54,12 @@ class NoCaptcha
     {
         $attributes['data-sitekey'] = $this->sitekey;
 
+        // by default callback is the function name from the callbacks.js file
+        $callback = array_key_exists('data-callback', $attributes) ? $attributes['data-callback'] : 'callbackFromDataAttribute';
+        $attributes['data-callback'] = $callback;
+
         $html = '<script src="'.$this->getJsLink($lang).'" async defer></script>'."\n";
-        $html .= '<div class="g-recaptcha"'.$this->buildAttributes($attributes).'></div>';
+        $html .= '<button class="g-recaptcha" ' .$this->buildAttributes($attributes).'>Submit</button>';
 
         return $html;
     }
