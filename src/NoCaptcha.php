@@ -42,6 +42,16 @@ class NoCaptcha
         $this->http = new Client([ 'timeout' => 2.0 ]);
     }
 
+    public function getCallbackFile()
+    {
+        return asset('/vendor/no-captcha/js/callbacks.js');
+    }
+
+    public function renderCallbackFile()
+    {
+        return '<script src="'. self::getCallbackFile() . '"></script>';
+    }
+
     /**
      * Render HTML captcha.
      *

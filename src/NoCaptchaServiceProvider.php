@@ -26,6 +26,11 @@ class NoCaptchaServiceProvider extends ServiceProvider
             return $app['captcha']->verifyResponse($value, $app['request']->getClientIp());
         });
 
+        $this->publishes([
+            __DIR__.'/assets/js/callbacks.js' => public_path('vendor/no-captcha/js/callbacks.js'),
+            ], 'captcha');
+
+
         if ($app->bound('form')) {
             $app['form']->macro('captcha', function ($attributes = []) use ($app) {
                 return $app['captcha']->display($attributes, $app->getLocale());
