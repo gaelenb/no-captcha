@@ -55,12 +55,15 @@ class NoCaptcha
     /**
      * Render HTML captcha.
      *
+     * @param string $buttonText
+     * @param string $classes
      * @param array  $attributes
      * @param string $lang
      *
      * @return string
      */
-    public function display($attributes = [], $lang = null)
+
+    public function display($buttonText = 'Submit', $classes = '', $attributes = [], $lang = null)
     {
         $attributes['data-sitekey'] = $this->sitekey;
 
@@ -69,7 +72,9 @@ class NoCaptcha
         $attributes['data-callback'] = $callback;
 
         $html = '<script src="'.$this->getJsLink($lang).'" async defer></script>'."\n";
-        $html .= '<button class="g-recaptcha" ' .$this->buildAttributes($attributes).'>Submit</button>';
+        $html .= '<button class="g-recaptcha '. $classes .'"'
+            .$this->buildAttributes($attributes).'>'
+            .$buttonText .'</button>';
 
         return $html;
     }
